@@ -1,11 +1,14 @@
 package com.jaygoo.demo.fragments
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.jaygoo.demo.R
+import com.jaygoo.demo.databinding.FragmentRangeBinding
 import com.jaygoo.widget.OnRangeChangedListener
 import com.jaygoo.widget.RangeSeekBar
 import com.jaygoo.widget.SeekBar
-import kotlinx.android.synthetic.main.fragment_range.*
 
 /**
 //                       _ooOoo_
@@ -36,15 +39,18 @@ import kotlinx.android.synthetic.main.fragment_range.*
  * =====================================================
  */
 class RangeSeekBarFragment: BaseFragment() {
-	override fun getLayoutId(): Int {
-		return R.layout.fragment_range
-	}
 
-	override fun initView(view: View) {
-		sb_range_1?.setProgress(0f, 100f)
-		changeSeekBarThumb(sb_range_1.leftSeekBar, sb_range_1.leftSeekBar.progress)
-		changeSeekBarThumb(sb_range_1.rightSeekBar, sb_range_1.rightSeekBar.progress)
-		sb_range_1?.setOnRangeChangedListener(object : OnRangeChangedListener{
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		val binding = FragmentRangeBinding.inflate(inflater, container, false)
+
+		binding.sbRange1.setProgress(0f, 100f)
+		changeSeekBarThumb(binding.sbRange1.leftSeekBar, binding.sbRange1.leftSeekBar.progress)
+		changeSeekBarThumb(binding.sbRange1.rightSeekBar, binding.sbRange1.rightSeekBar.progress)
+		binding.sbRange1?.setOnRangeChangedListener(object : OnRangeChangedListener{
 			override fun onRangeChanged(rangeSeekBar: RangeSeekBar, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
 				changeSeekBarThumb(rangeSeekBar.leftSeekBar, leftValue)
 				changeSeekBarThumb(rangeSeekBar.rightSeekBar, rightValue)
@@ -60,22 +66,23 @@ class RangeSeekBarFragment: BaseFragment() {
 
 		})
 
-		sb_range_2?.setProgress(0f, 100f)
+		binding.sbRange2?.setProgress(0f, 100f)
 
-		sb_range_3?.setRange(-100f, 100f)
-		sb_range_3?.setProgress(0f, 80f)
-		sb_range_3?.setIndicatorTextDecimalFormat("0")
+		binding.sbRange3?.setRange(-100f, 100f)
+		binding.sbRange3?.setProgress(0f, 80f)
+		binding.sbRange3?.setIndicatorTextDecimalFormat("0")
 
-		sb_range_4?.setProgress(20f, 70f)
+		binding.sbRange4?.setProgress(20f, 70f)
 
-		sb_range_5?.setProgress(20f, 60f)
+		binding.sbRange5?.setProgress(20f, 60f)
 
-		sb_range_6?.setProgress(20f, 70f)
+		binding.sbRange6?.setProgress(20f, 70f)
 
-		sb_range_8?.setProgress(20f, 60f)
-		sb_range_8?.leftSeekBar?.thumbDrawableId = R.drawable.step_1
-		sb_range_8?.rightSeekBar?.thumbDrawableId = R.drawable.step_2
+		binding.sbRange8?.setProgress(20f, 60f)
+		binding.sbRange8?.leftSeekBar?.thumbDrawableId = R.drawable.step_1
+		binding.sbRange8?.rightSeekBar?.thumbDrawableId = R.drawable.step_2
 
+		return binding.root
 	}
 
 	private fun changeSeekBarThumb(seekbar: SeekBar, value: Float){

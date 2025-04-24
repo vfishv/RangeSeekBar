@@ -1,12 +1,14 @@
 package com.jaygoo.demo.fragments
 
 import android.graphics.Color
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.jaygoo.demo.R
+import com.jaygoo.demo.databinding.FragmentStepBinding
+import com.jaygoo.demo.databinding.FragmentVerticalBinding
 import com.jaygoo.widget.*
-import kotlinx.android.synthetic.main.fragment_range.*
-import kotlinx.android.synthetic.main.fragment_step.*
-import kotlinx.android.synthetic.main.fragment_vertical.*
 import java.util.ArrayList
 
 /**
@@ -38,17 +40,18 @@ import java.util.ArrayList
  * =====================================================
  */
 class VerticalSeekBarFragment: BaseFragment() {
-	override fun getLayoutId(): Int {
-		return R.layout.fragment_vertical
-	}
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		val binding = FragmentVerticalBinding.inflate(inflater, container, false)
 
-	override fun initView(view: View) {
-
-		sb_vertical_2?.setIndicatorTextDecimalFormat("0.0")
-		sb_vertical_2?.setProgress(0f, 100f)
-		changeSeekBarThumb(sb_vertical_2.leftSeekBar, sb_vertical_2.leftSeekBar.progress)
-		changeSeekBarThumb(sb_vertical_2.rightSeekBar, sb_vertical_2.rightSeekBar.progress)
-		sb_vertical_2?.setOnRangeChangedListener(object : OnRangeChangedListener {
+		binding.sbVertical2?.setIndicatorTextDecimalFormat("0.0")
+		binding.sbVertical2?.setProgress(0f, 100f)
+		changeSeekBarThumb(binding.sbVertical2.leftSeekBar, binding.sbVertical2.leftSeekBar.progress)
+		changeSeekBarThumb(binding.sbVertical2.rightSeekBar, binding.sbVertical2.rightSeekBar.progress)
+		binding.sbVertical2?.setOnRangeChangedListener(object : OnRangeChangedListener {
 			override fun onRangeChanged(rangeSeekBar: RangeSeekBar, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
 				changeSeekBarThumb(rangeSeekBar.leftSeekBar, leftValue)
 				changeSeekBarThumb(rangeSeekBar.rightSeekBar, rightValue)
@@ -64,26 +67,26 @@ class VerticalSeekBarFragment: BaseFragment() {
 
 		})
 
-		sb_vertical_3?.setIndicatorTextDecimalFormat("0")
-		sb_vertical_4?.setIndicatorTextDecimalFormat("0")
-		sb_vertical_4?.setIndicatorTextStringFormat("%s%%")
-		sb_vertical_4?.setProgress(30f, 60.6f)
+		binding.sbVertical3?.setIndicatorTextDecimalFormat("0")
+		binding.sbVertical4?.setIndicatorTextDecimalFormat("0")
+		binding.sbVertical4?.setIndicatorTextStringFormat("%s%%")
+		binding.sbVertical4?.setProgress(30f, 60.6f)
 
-		sb_vertical_6?.setProgress(30f)
+		binding.sbVertical6?.setProgress(30f)
 
-		sb_vertical_7?.setProgress(40f, 80f)
+		binding.sbVertical7?.setProgress(40f, 80f)
 
-		sb_vertical_8?.setIndicatorTextDecimalFormat("0.0")
+		binding.sbVertical8?.setIndicatorTextDecimalFormat("0.0")
 
 		val stepsDrawables = ArrayList<Int>()
 		stepsDrawables.add(R.drawable.step_1)
 		stepsDrawables.add(R.drawable.step_2)
 		stepsDrawables.add(R.drawable.step_3)
 		stepsDrawables.add(R.drawable.step_1)
-		sb_vertical_9?.setStepsDrawable(stepsDrawables)
-		changeSeekBarIndicator(sb_vertical_9.leftSeekBar, sb_vertical_9.leftSeekBar.progress)
-		changeSeekBarIndicator(sb_vertical_9.rightSeekBar, sb_vertical_9.rightSeekBar.progress)
-		sb_vertical_9?.setOnRangeChangedListener(object : OnRangeChangedListener {
+		binding.sbVertical9?.setStepsDrawable(stepsDrawables)
+		changeSeekBarIndicator(binding.sbVertical9.leftSeekBar, binding.sbVertical9.leftSeekBar.progress)
+		changeSeekBarIndicator(binding.sbVertical9.rightSeekBar, binding.sbVertical9.rightSeekBar.progress)
+		binding.sbVertical9?.setOnRangeChangedListener(object : OnRangeChangedListener {
 			override fun onRangeChanged(rangeSeekBar: RangeSeekBar, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
 				changeSeekBarIndicator(rangeSeekBar.leftSeekBar, leftValue)
 				changeSeekBarIndicator(rangeSeekBar.rightSeekBar, rightValue)
@@ -98,6 +101,8 @@ class VerticalSeekBarFragment: BaseFragment() {
 			}
 
 		})
+
+		return binding.root
 	}
 
 	private fun changeSeekBarThumb(seekbar: SeekBar, value: Float){

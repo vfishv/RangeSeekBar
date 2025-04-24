@@ -1,11 +1,13 @@
 package com.jaygoo.demo.fragments
 
 import android.graphics.Typeface
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import com.jaygoo.demo.R
+import android.view.ViewGroup
+import com.jaygoo.demo.databinding.FragmentSingleBinding
 import com.jaygoo.widget.OnRangeChangedListener
 import com.jaygoo.widget.RangeSeekBar
-import kotlinx.android.synthetic.main.fragment_single.*
 
 /**
 //                       _ooOoo_
@@ -36,21 +38,24 @@ import kotlinx.android.synthetic.main.fragment_single.*
  * =====================================================
  */
 class SingleSeekBarFragment: BaseFragment() {
-	override fun getLayoutId(): Int {
-		return R.layout.fragment_single
-	}
 
-	override fun initView(view: View) {
-		sb_single1?.setProgress(10f)
-		sb_single2?.setProgress(20f)
-		sb_single3?.setProgress(30f)
-		sb_single4?.setProgress(40f)
-		sb_single4?.setIndicatorTextDecimalFormat("0.00")
-		sb_single4?.setIndicatorTextStringFormat("%s%%")
-		sb_single5?.setIndicatorTextDecimalFormat("0")
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		val binding = FragmentSingleBinding.inflate(inflater, container, false)
 
-		sb_single6?.setTypeface(Typeface.SANS_SERIF)
-		sb_single6?.setOnRangeChangedListener(object :OnRangeChangedListener{
+		binding.sbSingle1?.setProgress(10f)
+		binding.sbSingle2?.setProgress(20f)
+		binding.sbSingle3?.setProgress(30f)
+		binding.sbSingle4?.setProgress(40f)
+		binding.sbSingle4?.setIndicatorTextDecimalFormat("0.00")
+		binding.sbSingle4?.setIndicatorTextStringFormat("%s%%")
+		binding.sbSingle5?.setIndicatorTextDecimalFormat("0")
+
+		binding.sbSingle6?.setTypeface(Typeface.SANS_SERIF)
+		binding.sbSingle6?.setOnRangeChangedListener(object :OnRangeChangedListener{
 			override fun onRangeChanged(rangeSeekBar: RangeSeekBar, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
 				when {
 					leftValue < 33.33 -> rangeSeekBar.leftSeekBar.setIndicatorText("赶往店中")
@@ -74,6 +79,7 @@ class SingleSeekBarFragment: BaseFragment() {
 			}
 
 		})
+		return binding.root
 	}
 
 

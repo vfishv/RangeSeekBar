@@ -1,8 +1,11 @@
 package com.jaygoo.demo.fragments
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.jaygoo.demo.R
-import kotlinx.android.synthetic.main.fragment_step.*
+import com.jaygoo.demo.databinding.FragmentStepBinding
 import java.util.ArrayList
 
 /**
@@ -34,18 +37,20 @@ import java.util.ArrayList
  * =====================================================
  */
 class StepsSeekBarFragment : BaseFragment() {
-	override fun getLayoutId(): Int {
-		return R.layout.fragment_step
-	}
-
-	override fun initView(view: View) {
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		val binding = FragmentStepBinding.inflate(inflater, container, false)
 		val stepsDrawables = ArrayList<Int>()
 		stepsDrawables.add(R.drawable.step_1)
 		stepsDrawables.add(R.drawable.step_2)
 		stepsDrawables.add(R.drawable.step_3)
 		stepsDrawables.add(R.drawable.step_4)
-		sb_steps_1?.setStepsDrawable(stepsDrawables)
-		sb_steps_2?.setStepsDrawable(stepsDrawables)
+		binding.sbSteps1.setStepsDrawable(stepsDrawables)
+		binding.sbSteps2.setStepsDrawable(stepsDrawables)
+		return binding.root
 	}
 
 
