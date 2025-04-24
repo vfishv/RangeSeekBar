@@ -9,9 +9,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Parcelable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -28,6 +25,9 @@ import java.util.List;
 import static com.jaygoo.widget.SeekBar.INDICATOR_ALWAYS_HIDE;
 import static com.jaygoo.widget.SeekBar.INDICATOR_ALWAYS_SHOW;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
 
 public class RangeSeekBar extends View {
 
